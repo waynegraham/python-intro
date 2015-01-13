@@ -2,8 +2,7 @@
 
 * Text Editor ([Atom](https://atom.io) or [SublimeText](http://www.sublimetext.com))
 * [Git](http://git-scm.com/download/)
-* Python ([Anaconda](https://store.continuum.io/cshop/anaconda/) or
-  [official release](https://www.python.org/downloads/).
+* Python ([latest 2.7 release](https://www.python.org/downloads/))
 * Account on [Github](https://github.com)
 * Github client (https://windows.github.com/ or https://mac.github.com/)
 
