@@ -97,6 +97,20 @@ In `git`, saved chages are called **commits**. Commits are pretty glorious, beca
 
 Each commit has an associated **commit message**, which is a description explaining why a particular change was made. Thanks to these messages, you and others can read through commits and understand what you’ve done and why.
 
+#### Push to GitHub
+
+In `git`, you have to **push** your changes to a remote place before it
+shows up. In the GitHub client, this is renamed "Sync" and allows you to
+get the lastest changes everywhere they need to be.
+
+1. Click on the name of the repository you're working with.
+2. You'll see a view that lists all of your recent changes. Add a commit message and description to commit your changes
+3. When you're ready to share your changes, click the blue **Sync**
+   button in the upper-right corner.
+
+![commit](https://help.github.com/assets/images/windows/commits/windows_commit.png)
+
+
 (adapted from https://guides.github.com/activities/hello-world/)
 
 ### Something "Useful"
