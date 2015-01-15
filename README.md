@@ -1,4 +1,7 @@
-# Intro to Git and Python
+# Intro to Git and Github with Python
+
+This is what you need to ensure everything will work properly for this
+session.
 
 * Text Editor ([Atom](https://atom.io) or [SublimeText](http://www.sublimetext.com))
 * [Git](http://git-scm.com/download/)
@@ -28,14 +31,16 @@ man   # documentation for command
 
 ## Git
 
-!['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
-
 [Try Git](https://try.github.io)
 
-## Github
-Nothing directly to do with `git`.
+!['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
 
-## Workshop
+
+## Github
+Github is a social code sharing site; it is something completely
+different than the command-line `git` tool.
+
+## Practice
 
 Create a new `git` repository, write a short Python program, and share it on Github.
 
