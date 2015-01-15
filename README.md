@@ -234,6 +234,10 @@ What happens when you run this? What happens when you remove the '#' from the di
 Add the files you created to `git`, create a [good message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) about them, and push it to Github. 
 
 
+## Reflection
+
+Git is one of the most powerful, useful tools you will be introduced to this semester. Github will allow you to share the work you're creating with your collegues, and with wider audiences. This can be part of your professional credentials and contributes to building your online identity. No matter what people tell you, writing software is an inheritenly social endeavor, it's a way of communicating your intent to other developers in a way that can be executed by computers. 
+
 ## Resources
 
 * [Make Your Code Citable](https://guides.github.com/activities/citable-code/)
