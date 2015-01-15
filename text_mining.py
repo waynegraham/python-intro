@@ -16,4 +16,4 @@ text = nltk.Text(cooking_tokens)
 #print cooking_tokens[0:10]
 #print text.collocations()
 #print text.concordance('lip')
-#print text.similar('Pot')
+print text.similar('Pot')

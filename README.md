@@ -223,9 +223,15 @@ text = nltk.Text(cooking_tokens)
 #print cooking_tokens[0:10]
 #print text.collocations()
 #print text.concordance('lip')
-#print text.similar('Pot')
+print text.similar('Pot')
 
 ```
+
+What happens when you run this? What happens when you remove the '#' from the different print lines?
+
+#### 6. Share Your Code
+
+Add the files you created to `git`, create a [good message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) about them, and push it to Github. 
 
 
 ## Resources
