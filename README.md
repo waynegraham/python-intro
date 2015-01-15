@@ -99,6 +99,119 @@ Each commit has an associated **commit message**, which is a description explain
 
 (adapted from https://guides.github.com/activities/hello-world/)
 
+### Something "Useful"
+
+Doing computational work requires data. One useful definition of data from the Univeristy of Minnesota is "[a] reinterpretable representation of information in a formalized manner suitable for communication, interpretation, or processing." While there are different types of data, the data that we can use for computational work is digital data.
+
+For this workshop, we will use data from the Digital Public Library of America, which is working to aggregate and make available data from cultural heritage institutions across the United States. We can take this data and use it to find items of interest and trends across the contributing organizations.
+
+To do that, we first need to get a key from the DPLA so that we can gain access to the data. We will then interact with the API through our browsers and examine just what this data looks like to think about the types of questions we can explore using it.
+
+#### 1. Get an API Key
+Go to [http://dp.la/info/developers/codex/](http://dp.la/info/developers/codex/). This is the documentation for the DPLA API. Remember from our earlier conversation that an API is an interface that allows computer programs to talk to one another: if you format your request in a particular way, you will get back the data from the server in a particular data format without any surrounding HTML.
+
+First, you will need an API key.
+
+If you are on a Mac, there is a utility built into your system called "cURL". To use cURL to request your key, type:
+
+```
+$ curl -v -XPOST http://api.dp.la/v2/api_key/YOUR_EMAIL@example.com
+```
+
+into your Terminal, replacing "YOUR_EMAIL@example.com" with your actual email address.
+
+If you are on Windows, your utility is called "Invoke-WebRequest". To use Invoke-WebRequest to request your key, type:
+
+```
+Invoke-WebRequest -Uri ("http://api.dp.la/v2/api_key/YOUR_EMAIL@example.com") -Method POST -Verbose
+```
+
+into Powershell, replacing "YOUR_EMAIL@example.com" with your actual email address.
+
+You should get an email from the DPLA with your key.
+
+#### 2.  Examining Data in a Browser
+
+To get a sense of how the API key works and what the data we get back looks like, let's use the web-browser. If you can, please use [Chrome](https://www.google.com/chrome/).
+
+In your browser, type:
+
+```
+http://api.dp.la/v2/items?q=cooking&api_key=YOURAPIKEY
+```
+
+replacing "YOURAPIKEY" with the key just emailed to you.
+
+The first part of this URL ("http://api.dp.la/v2/") is the "base" URL. This must go at the beginning of all API requests. Next, we are telling the server that we want to see "items" and we want to see the items that match the keyword "cooking". The "`?q=`" is the grammar of the API – this is how we signal to the server that we want to query for the word following the "`=`". To see additional options for the API, go to [http://dp.la/info/developers/codex/requests/](http://dp.la/info/developers/codex/requests/).
+
+You should see something that looks like:
+
+```json
+{"count":10646,"start":0,"limit":10,"docs":[{"@context":"http://dp.la/api/items/context","isShownAt":"https://digital.lib.ecu.edu/7394","dataProvider":"East Carolina University","@type":"ore:Aggregation","provider":{"@id":"http://dp.la/api/contributor/digitalnc","name":"North Carolina Digital Heritage Center"},"object":"https://digital.lib.ecu.edu/encore/ncgre000/00000008/00007394/00007394_tn_0001.gif","ingestionSequence":14,"id":"7cb32765b538a57a35fbdbfad03be57b","ingestDate":"2014-08-19T10:45:46.393447","_rev":"2-1b21f198053a2727bffece028cd30a6d","aggregatedCHO":"#sourceResource","_id":"digitalnc--urn:brevard.lib.unc.eduecu_c5:oai:digital.lib.ecu.edu/7394"
+```
+Well done! You have just made a successful API request.
+
+#### 3. Thinking about JSON
+What you are looking at is a JSON document. In JSON, all the information is given in "key : value" pairs. On the left-hand side is the "key". This is a standardized description of bits of information, such as "provider" or "ingestData". On the right-hand side is the "value", or the information that applies for a particular item. With your table, look at the JSON document in your browser and try to answer the following questions:
+
+1. Look at the search results: how many objects are displayed here? How do you know?
+1. How many objects in the DPLA database fit the query for *cooking*?
+2. What questions might you ask of this dataset? Which key:value pairs would be most helpful for answering those questions?
+3. What questions would be hard to answer with this dataset? What additional information would you need?
+
+#### 4. Install DPyLA Library
+The DPyLA library makes it easy to work with the DPLA API than manually writing everything yourself. In your terminal, use `pip` to install `dpla`.
+
+```
+$ pip install dpla
+```
+
+If you run in to permission issues, you may need to type `sudo` at the beginning of the line. What does `sudo` do?
+
+#### 5. A Program with DPLA
+
+Open a new file (e.g. `dpla-example.py`) in your text editor, and let's set up a program to interact with DPLA:
+
+```python
+from dpla.api import DPLA  
+
+dpla = DPLA('your-key-here')
+result = dpla.search('cooking')
+
+print result.items[0:3]
+
+```
+
+What does the line `print result.items[0:3]` mean?
+
+#### 6. NLTK
+
+Ensure you have the `stopwords` and tokenizer lists installed. In your Python interpretor, import nltk and download stopwords tokenizer (punkt).
+
+```shell
+Python 2.7.9 (default, Dec 10 2014, 23:46:04)
+[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.56)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> nltk.download('stopwords')
+>>> nltk.download('punkt')
+>>> quit()
+```
+
+Get a dummy dataset by downloading a prepared dataset:
+
+```
+$ curl -O https://raw.githubusercontent.com/waynegraham/python-intro/master/text_results.txt .
+```
+
+Create a new file `text_mining.py` and add the following:
+
+```python
+
+
+```
+
+
 ## Resources
 
 * [Make Your Code Citable](https://guides.github.com/activities/citable-code/)
