@@ -62,7 +62,12 @@ Create a new file and open it in your text editor:
 ```
 $ touch example.py
 $ atom example.py
+$ subl example.py
 ```
+
+  > OS X users can create a terminal link to Sublime Text with `ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl`
+  > Windows users can do this, but it's a bit more involved. See this
+  > [Stack Overflow post](http://stackoverflow.com/questions/9440639/sublime-text-from-command-line-win7)
 
 (Windows PowerShell users may need)
 
@@ -251,7 +256,7 @@ text = nltk.Text(tokens)
 Now that we have that in place, we can print various components of the
 text by adding the following:
 
-```pythong
+```python
 #print book_text[0:20]
 #print tokens[0:10]
 #print text.collocations()
@@ -297,7 +302,7 @@ Add the files you created to `git`, create a [good message](http://tbaggery.com/
 
 ## Reflection
 
-Git is one of the most powerful, useful tools you will be introduced to this semester. Github will allow you to share the work you're creating with your collegues, and with wider audiences. This can be part of your professional credentials and contributes to building your online identity. No matter what people tell you, writing software is an inheritenly social endeavor, it's a way of communicating your intent to other developers in a way that can be executed by computers. 
+Git is one of the most powerful, useful tools you will be introduced to this semester. Github allows you to share the work you're creating with your collegues, and with wider audiences. This can be part of your professional credentials and contributes to building your online identity. No matter what people tell you, writing software is an inheritenly social endeavor, it's a way of communicating your intent to other developers in a way that can be executed by computers. 
 
 ## Resources
 
