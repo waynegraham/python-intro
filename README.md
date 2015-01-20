@@ -33,7 +33,7 @@ man   # documentation for command
 
 [Try Git](https://try.github.io)
 
-!['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
+!['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif?raw=true)
 
 
 ## Github
@@ -66,7 +66,7 @@ $ subl example.py
 ```
 
   > OS X users can create a terminal link to Sublime Text with `ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl`
-  > Windows users can do this, but it's a bit more involved. See this
+  > **Windows** users can do this, but it's a bit more involved. See this
   > [Stack Overflow post](http://stackoverflow.com/questions/9440639/sublime-text-from-command-line-win7)
 
 (Windows PowerShell users may need)
