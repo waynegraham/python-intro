@@ -31,20 +31,21 @@ man   # documentation for command
 
 ## Git
 
-[Try Git](https://try.github.io)
+The problem we are trying to solve: ['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
 
-['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
-
+How we solve it these days: [Try Git](https://try.github.io)
 
 ## Github
 Github is a social code sharing site; it is something completely
-different than the command-line `git` tool.
+different than the command-line `git` tool. It's vitally important you
+are able to keep the two separated in your mind as doing very different
+things. 
 
 ## Practice
 
 Create a new `git` repository, write a short Python program, and share it on Github.
 
-Open the bash prompt that was included in Git (for OS X users, open the `Terminal` app). Create a new project directy and change in to it:
+Open the bash prompt that was included in Git (git bash; for OS X users, open the `Terminal` app). Create a new project directy and change in to it:
 
 ```
 $ mkdir -p projects/workshop
@@ -57,7 +58,21 @@ Intialize a new `git` repository:
 $ git init
 ```
 
-Create a new file and open it in your text editor:
+Check out everything that is in the directory:
+
+```
+$ ls -la
+total 0
+drwxr-xr-x    3 user  staff   102 Jan 20 08:54 .
+drwxr-xr-x  126 user  staff  4284 Jan 20 08:54 ..
+drwxr-xr-x    9 user  staff   306 Jan 20 08:54 .git
+```
+
+The database of all your changes is stored in a hidden directory
+(`.git`). The `git` client reads this database when you issue a command
+and then produces results to the screen.
+
+Now we can add a program. Create a new file and open it in your text editor:
 
 ```
 $ touch example.py
@@ -67,9 +82,9 @@ $ subl example.py
 
   > OS X users can create a terminal link to Sublime Text with `ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl`
   > **Windows** users can do this, but it's a bit more involved. See this
-  > [Stack Overflow post](http://stackoverflow.com/questions/9440639/sublime-text-from-command-line-win7)
+  > [Stack Overflow post](http://stackoverflow.com/questions/9440639/sublime-text-from-command-line-win7).
 
-(Windows PowerShell users may need)
+(Windows PowerShell users may need, but PowerShell is the path of pain)
 
 ```
 $ New-Item -ItemType file example.py
@@ -84,7 +99,14 @@ Save your program, and in the console/terminal, type:
 $ python example.py
 ```
 
-You should see the text "`Hello World`" printed on the terminal.
+You should see the text `Hello World` printed on the terminal.
+
+### Create an Account
+
+Create an account at https://github.com. You'll need to verify your
+address, and we'll need to send your "keys" to the server so you don't
+have to sign in to GitHub every time you push code. If you get lost,
+check out their [documentation](https://help.github.com/categories/setup/).
 
 ### Create a Repository
 
@@ -106,6 +128,12 @@ Click **Create repository**. Boom, repository! :boom:
 In `git`, saved chages are called **commits**. Commits are pretty glorious, because a bunch of them together read like the history of your project.
 
 Each commit has an associated **commit message**, which is a description explaining why a particular change was made. Thanks to these messages, you and others can read through commits and understand what you’ve done and why.
+
+These messages are really important, and it takes some discipline to
+actually use them. Take a piece of hard-learned advice, it will
+eventually save you. You should read Tim Pope's [A Note About Git Commit
+Messages](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+to see how to write effective `git` messages.
 
 #### Push to GitHub
 
