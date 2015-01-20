@@ -35,8 +35,6 @@ man   # documentation for command
 
 ['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
 
-![final.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
-
 
 ## Github
 Github is a social code sharing site; it is something completely
