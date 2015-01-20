@@ -122,88 +122,93 @@ get the lastest changes everywhere they need to be.
 
 Doing computational work requires data. One useful definition of data from the Univeristy of Minnesota is "[a] reinterpretable representation of information in a formalized manner suitable for communication, interpretation, or processing." While there are different types of data, the data that we can use for computational work is digital data.
 
-For this workshop, we will use data from the Digital Public Library of America, which is working to aggregate and make available data from cultural heritage institutions across the United States. We can take this data and use it to find items of interest and trends across the contributing organizations.
+For this workshop, we will use data from Project Gutenberg (*Pride and
+Prejudice*) that we will programmatically download and analyze.
 
-To do that, we first need to get a key from the DPLA so that we can gain access to the data. We will then interact with the API through our browsers and examine just what this data looks like to think about the types of questions we can explore using it.
+#### 1. Downloading a Book
 
-#### 1. Get an API Key
-Go to [http://dp.la/info/developers/codex/](http://dp.la/info/developers/codex/). This is the documentation for the DPLA API. Remember from our earlier conversation that an API is an interface that allows computer programs to talk to one another: if you format your request in a particular way, you will get back the data from the server in a particular data format without any surrounding HTML.
+From the [top 100](https://www.gutenberg.org/browse/scores/top) list of
+books on the site, I took the top-downloaded book. If you navigate your
+browser to the project page for [Pride and Prejudice](https://www.gutenberg.org/ebooks/1342), you will see a list of download formats. For this exercise, we need the '[**Plain Text UTF-8**](https://www.gutenberg.org/ebooks/1342.txt.utf-8)' version.
 
-First, you will need an API key.
-
-If you are on a Mac, there is a utility built into your system called "cURL". To use cURL to request your key, type:
-
-```
-$ curl -v -XPOST http://api.dp.la/v2/api_key/YOUR_EMAIL@example.com
-```
-
-into your Terminal, replacing "YOUR_EMAIL@example.com" with your actual email address.
-
-If you are on Windows, your utility is called "Invoke-WebRequest". To use Invoke-WebRequest to request your key, type:
-
-```
-Invoke-WebRequest -Uri ("http://api.dp.la/v2/api_key/YOUR_EMAIL@example.com") -Method POST -Verbose
-```
-
-into Powershell, replacing "YOUR_EMAIL@example.com" with your actual email address.
-
-You should get an email from the DPLA with your key.
-
-#### 2.  Examining Data in a Browser
-
-To get a sense of how the API key works and what the data we get back looks like, let's use the web-browser. If you can, please use [Chrome](https://www.google.com/chrome/).
-
-In your browser, type:
-
-```
-http://api.dp.la/v2/items?q=cooking&api_key=YOURAPIKEY
-```
-
-replacing "YOURAPIKEY" with the key just emailed to you.
-
-The first part of this URL ("http://api.dp.la/v2/") is the "base" URL. This must go at the beginning of all API requests. Next, we are telling the server that we want to see "items" and we want to see the items that match the keyword "cooking". The "`?q=`" is the grammar of the API – this is how we signal to the server that we want to query for the word following the "`=`". To see additional options for the API, go to [http://dp.la/info/developers/codex/requests/](http://dp.la/info/developers/codex/requests/).
-
-You should see something that looks like:
-
-```json
-{"count":10646,"start":0,"limit":10,"docs":[{"@context":"http://dp.la/api/items/context","isShownAt":"https://digital.lib.ecu.edu/7394","dataProvider":"East Carolina University","@type":"ore:Aggregation","provider":{"@id":"http://dp.la/api/contributor/digitalnc","name":"North Carolina Digital Heritage Center"},"object":"https://digital.lib.ecu.edu/encore/ncgre000/00000008/00007394/00007394_tn_0001.gif","ingestionSequence":14,"id":"7cb32765b538a57a35fbdbfad03be57b","ingestDate":"2014-08-19T10:45:46.393447","_rev":"2-1b21f198053a2727bffece028cd30a6d","aggregatedCHO":"#sourceResource","_id":"digitalnc--urn:brevard.lib.unc.eduecu_c5:oai:digital.lib.ecu.edu/7394"
-```
-Well done! You have just made a successful API request.
-
-#### 3. Thinking about JSON
-What you are looking at is a JSON document. In JSON, all the information is given in "key : value" pairs. On the left-hand side is the "key". This is a standardized description of bits of information, such as "provider" or "ingestData". On the right-hand side is the "value", or the information that applies for a particular item. With your table, look at the JSON document in your browser and try to answer the following questions:
-
-1. Look at the search results: how many objects are displayed here? How do you know?
-1. How many objects in the DPLA database fit the query for *cooking*?
-2. What questions might you ask of this dataset? Which key:value pairs would be most helpful for answering those questions?
-3. What questions would be hard to answer with this dataset? What additional information would you need?
-
-#### 4. Install DPyLA Library
-The DPyLA library makes it easy to work with the DPLA API than manually writing everything yourself. In your terminal, use `pip` to install `dpla`.
-
-```
-$ pip install dpla
-```
-
-If you run in to permission issues, you may need to type `sudo` at the beginning of the line. What does `sudo` do?
-
-#### 5. A Program with DPLA
-
-Open a new file (e.g. `dpla-example.py`) in your text editor, and let's set up a program to interact with DPLA:
+In a new file in your project directory, create `austen_analysis.py`. In
+it, we need to import the Python library we need to download web content
+(`urllib2`) and set up the download mechanism.
 
 ```python
-from dpla.api import DPLA  
+import urllib2
 
-dpla = DPLA('your-key-here')
-result = dpla.search('cooking')
+book = urllib2.urlopen('https://www.gutenberg.org/ebooks/1342.txt.utf-8')
 
-print result.items[0:3]
+book_text = book.read().decode('utf-8')
 
+print book_text
 ```
 
-What does the line `print result.items[0:3]` mean?
+Don't get too hung up on the syntax, but basically this opens a web
+connection to the url (https://www.gutenberg.org/ebooks/1342.txt.utf-8),
+then reads the content and ensures that the content is decoded using UTF-8 standards.
 
-#### 6. NLTK
+In your terminal, run the script (`python austen_analysis.py`). If
+everything goes well, you should see the terminal print *Pride and
+Prejudice* to the screen.
+
+```
+...
+This Web site includes information about Project Gutenberg-tm,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+```
+
+#### 2. Git Cycle
+
+Now that something is working, it's time to let `git` know about it.
+From the terminal, run `git status` to see what `git` knows about.
+
+```
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	austen_analysis.py
+```
+
+Now we need to tell `git` to track changes in the `austen_analysis.py`
+file.
+
+  $ git add austen_analysis.py
+
+Run `git status` again and you will see that it has moved in the output:
+
+```
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   austen_analysis.py
+```
+
+Now we commit (with a good commit message):
+
+  git commit -m "Download PaP from Proj. Gutenberg"
+
+  > If you forget to '-m' and ever get stuck, type "**:x**" to get out
+  > of vim.
+
+The last step is to push this change to GitHub to "publish" the code.
+
+  git push origin master
+
+This last step isn't necessary for every commit, just when you are ready
+to share the code.
+
+#### 2. NLTK
 
 Ensure you have the `stopwords` and tokenizer lists installed. In your Python interpretor, import nltk and download stopwords tokenizer (punkt).
 
@@ -217,36 +222,73 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> quit()
 ```
 
-Get a dummy dataset by downloading a prepared dataset:
-
-```
-$ curl -O https://raw.githubusercontent.com/waynegraham/python-intro/master/text_results.txt .
-```
-
-Create a new file `text_mining.py` and add the following:
+In your editor (with `austen_analysis.py` open), we need to import a few
+more libraries to do some analysis, stopwords and a word tokenizer.
 
 ```python
+import urllib2
+
 import nltk
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 
-with open('text_results.txt', 'r') as file:
-    cooking_text = file.read().decode('utf8')
+book = urllib2.urlopen('https://www.gutenberg.org/ebooks/1342.txt.utf-8')
 
-# Define Functions
-cooking_tokens = word_tokenize(cooking_text)
-text = nltk.Text(cooking_tokens)
+book_text = book.read().decode('utf-8')
 
-# Make Function Calls
-#print cooking_text[0:20]
-#print cooking_tokens[0:10]
-#print text.collocations()
-#print text.concordance('lip')
-print text.similar('Pot')
+print book_text
 
 ```
 
+Now comment out `print book_text`. Under that line, add the following to
+calculate the tokens and prepare the book for analysis:
+
+```python
+tokens = word_tokenize(book_text)
+text = nltk.Text(tokens)
+```
+
+Now that we have that in place, we can print various components of the
+text by adding the following:
+
+```pythong
+#print book_text[0:20]
+#print tokens[0:10]
+#print text.collocations()
+print text.concordance('lizzy')
+#print text.similar('park')
+```
+
 What happens when you run this? What happens when you remove the '#' from the different print lines?
+
+If you've gotten turned around somewhere, this is the full script:
+
+```python
+import urllib2
+import nltk
+from nltk.corpus import stopwords
+from nltk import word_tokenize
+
+
+book = urllib2.urlopen('https://www.gutenberg.org/ebooks/1342.txt.utf-8')
+book_text = book.read().decode('utf-8')
+
+tokens = word_tokenize(book_text)
+text = nltk.Text(tokens)
+
+#print book_text[0:20]
+#print tokens[0:10]
+#print text.collocations()
+print text.concordance('lizzy')
+#print text.similar('park')
+```
+
+What are the steps at this point?
+
+* `git status`
+* `git add`
+* `git commit`
+* `git push`
 
 #### 6. Share Your Code
 
