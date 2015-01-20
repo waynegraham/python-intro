@@ -233,7 +233,7 @@ Now we commit (with a good commit message):
 $ git commit -m "Download Pride and Pred. from Proj. Gutenberg"
 ```
 
-  > If you forget to '-m' and ever get stuck, type "**:x**" to get out
+  > If you forget to '-m' and ever get stuck, type "esc **:x**" to get out
   > of vim.
 
 The last step is to push this change to GitHub to "publish" the code.
