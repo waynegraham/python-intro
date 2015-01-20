@@ -166,7 +166,7 @@ browser to the project page for [Pride and Prejudice](https://www.gutenberg.org/
 
 In a new file in your project directory, create `austen_analysis.py`. In
 it, we need to import the Python library we need to download web content
-(`urllib2`) and set up the download mechanism.
+(`urllib2`) and set up the download program.
 
 ```python
 import urllib2
@@ -180,7 +180,8 @@ print book_text
 
 Don't get too hung up on the syntax, but basically this opens a web
 connection to the url (https://www.gutenberg.org/ebooks/1342.txt.utf-8),
-then reads the content and ensures that the content is decoded using UTF-8 standards.
+then reads the server response, ensures that the content is decoded
+using UTF-8 standards, and prints it to the terminal window.
 
 In your terminal, run the script (`python austen_analysis.py`). If
 everything goes well, you should see the terminal print *Pride and
@@ -194,21 +195,20 @@ Archive Foundation, how to help produce our new eBooks, and how to
 subscribe to our email newsletter to hear about new eBooks.
 ```
 
-#### 2. Git Cycle
+#### 2. Git Development Cycle
 
 Now that something is working, it's time to let `git` know about it.
 From the terminal, run `git status` to see what `git` knows about.
 
 ```
+$ git status
 On branch master
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
 	austen_analysis.py
+
+nothing added to commit but untracked files present (use "git add" to track)
 ```
 
 Now we need to tell `git` to track changes in the `austen_analysis.py`
@@ -229,7 +229,9 @@ Changes to be committed:
 
 Now we commit (with a good commit message):
 
-  git commit -m "Download PaP from Proj. Gutenberg"
+```
+$ git commit -m "Download Pride and Pred. from Proj. Gutenberg"
+```
 
   > If you forget to '-m' and ever get stuck, type "**:x**" to get out
   > of vim.
@@ -239,11 +241,18 @@ The last step is to push this change to GitHub to "publish" the code.
   git push origin master
 
 This last step isn't necessary for every commit, just when you are ready
-to share the code.
+to share the code. You can also check out the history of your commits:
+
+```
+$ git log
+323804d [5 seconds ago] (Wayne Graham) Download Pride and Pred. from Proj. Gutenberg
+b23d2ab [2 minutes ago] (Wayne Graham) Add example document
+```
 
 #### 2. NLTK
 
-Ensure you have the `stopwords` and tokenizer lists installed. In your Python interpretor, import nltk and download stopwords tokenizer (punkt).
+Ensure you have the `stopwords` and tokenizer lists installed. In your Python
+interpretor, import nltk and download `stopwords` and the tokenizer (`punkt`).
 
 ```shell
 Python 2.7.9 (default, Dec 10 2014, 23:46:04)
@@ -285,11 +294,12 @@ Now that we have that in place, we can print various components of the
 text by adding the following:
 
 ```python
-#print book_text[0:20]
-#print tokens[0:10]
-#print text.collocations()
+# print book_text
+# print book_text[0:20]
+# print tokens[0:10]
+# print text.collocations()
 print text.concordance('lizzy')
-#print text.similar('park')
+# print text.similar('park')
 ```
 
 What happens when you run this? What happens when you remove the '#' from the different print lines?
@@ -298,22 +308,24 @@ If you've gotten turned around somewhere, this is the full script:
 
 ```python
 import urllib2
+
 import nltk
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 
-
 book = urllib2.urlopen('https://www.gutenberg.org/ebooks/1342.txt.utf-8')
+
 book_text = book.read().decode('utf-8')
 
 tokens = word_tokenize(book_text)
 text = nltk.Text(tokens)
 
-#print book_text[0:20]
-#print tokens[0:10]
-#print text.collocations()
+# print book_text
+# print book_text[0:20]
+# print tokens[0:10]
+# print text.collocations()
 print text.concordance('lizzy')
-#print text.similar('park')
+# print text.similar('park')
 ```
 
 What are the steps at this point?
