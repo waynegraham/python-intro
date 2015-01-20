@@ -33,7 +33,9 @@ man   # documentation for command
 
 [Try Git](https://try.github.io)
 
-!['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif?raw=true)
+['final'.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
+
+![final.doc](http://www.phdcomics.com/comics/archive/phd101212s.gif)
 
 
 ## Github
