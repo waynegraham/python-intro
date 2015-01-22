@@ -348,10 +348,7 @@ Git is one of the most powerful, useful tools you will be introduced to this sem
 
 * [Make Your Code Citable](https://guides.github.com/activities/citable-code/)
 * [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+* [Another git cheat sheet](http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf)
+* [Pro Git (free online book)](http://git-scm.com/book/en/v2)
 * [Getting Your Project on Github](https://guides.github.com/introduction/getting-your-project-on-github/)
-
-
-
-
-
 
